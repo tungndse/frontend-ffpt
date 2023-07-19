@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import { message } from 'antd';
 import { orderService } from '../services/orderService';
+import { BASE_URL } from '../services/httpService';
 
 export const getOrderList = createAsyncThunk('orderSlice/getOrderList', async (pagination, thunkAPI) => {
 	try {
-		const result = await fetch('https://localhost:44323/api/v1.0/order');
+		const result = await fetch('https://webapp-ffpt.azurewebsites.net/api/v1.0/order');
 		const data = await result.json();
 		console.log('getOrderList', data.results);
 		let sortedOrder = data.results;
@@ -22,7 +23,7 @@ export const getOrderList = createAsyncThunk('orderSlice/getOrderList', async (p
 
 export const getOrderInfo = createAsyncThunk('orderSlice/getOrderInfo', async (id, thunkAPI) => {
 	try {
-		const res = await fetch(`https://localhost:44323/api/v1.0/order/${id}`);
+		const res = await fetch(BASE_URL + `/order/${id}`);
 		const data = await res.json();
 		console.log('getOrderInfo', data);
 		return data;
@@ -42,7 +43,7 @@ export const updateStatusOrder = createAsyncThunk(
 				},
 				body: JSON.stringify(newOrderInfo),
 			};
-			const url = `https://localhost:44323/api/v1.0/order/${orderId}?orderStatus=${newOrderInfo.orderStatus}`;
+			const url = BASE_URL + `/order/${orderId}?orderStatus=${newOrderInfo.orderStatus}`;
 			const response = await fetch(url, requestOptions);
 			if (!response.ok) {
 				throw new Error('Failed to update status'); // Handle non-2xx response status

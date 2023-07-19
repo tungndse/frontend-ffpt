@@ -69,7 +69,7 @@ export default function TableOrderManagement() {
 			dataIndex: 'orderName',
 			key: 'orderName',
 			align: 'center',
-			sorter: true,
+			//sorter: true,
 			sorter: (a, b) => {
 				if (a.orderName > b.orderName) {
 					return 1;

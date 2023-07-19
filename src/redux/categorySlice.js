@@ -1,4 +1,5 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { BASE_URL } from '../services/httpService';
 import { categoryService } from '../services/categoryService';
 
 const initialState = {
@@ -18,7 +19,7 @@ export const setCurrentCategory = createAsyncThunk('category/setCurrentCategory'
 });
 export const getCategoryList = createAsyncThunk('category/getCategoryList', async (data, thunkAPI) => {
 	try {
-		const res = await fetch('https://localhost:44323/api/v1.0/category/GetListCategory');
+		const res = await fetch(BASE_URL + '/category/GetListCategory');
 		const data = await res.json();
 		return data.results;
 	} catch (error) {

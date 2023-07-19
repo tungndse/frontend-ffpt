@@ -1,4 +1,3 @@
-import { localStorageService } from './localService';
 export const TOKEN_CYBERSOFT = process.env.REACT_APP_CYBERSOFT_TOKEN;
 
 export const getAccessToken = () => {

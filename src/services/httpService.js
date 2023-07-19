@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getRequestConfig, getAccessToken } from './configURL';
 import { startLoading, stopLoading } from '../redux/loadingSlice';
 import { store } from '../redux/store';
-export const BASE_URL = 'https://ffptprojectapi20221008031045.azurewebsites.net/api/v1.0';
+export const BASE_URL = 'https://webapp-ffpt.azurewebsites.net/api/v1.0';
 let timeRequestMax;
 
 export const httpService = axios.create({

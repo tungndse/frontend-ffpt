@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import { message } from 'antd';
 import { settingService } from '../services/settings';
+import { BASE_URL } from '../services/httpService';
 
 export const getListTimeSlot = createAsyncThunk('settingSlice/getListTimeSlot', async (id, thunkAPI) => {
 	try {
-		const result = await fetch('https://localhost:44323/api/v1.0/settings/GetListTimeslot');
+		const result = await fetch(BASE_URL + '/settings/GetListTimeslot');
 		const data = await result.json();
 		return data.results;
 	} catch (error) {
@@ -15,7 +16,7 @@ export const getListTimeSlot = createAsyncThunk('settingSlice/getListTimeSlot', 
 const settingSlice = createSlice({
 	name: 'settingSlice',
 	initialState: {
-		listTimeSlot: [],
+		listTimeSlot: []
 	},
 	reducers: {},
 	extraReducers: {
@@ -25,8 +26,9 @@ const settingSlice = createSlice({
 		[getListTimeSlot.fulfilled]: (state, action) => {
 			state.listTimeSlot = action.payload;
 		},
-		[getListTimeSlot.rejected]: (state, action) => {},
-	},
+		[getListTimeSlot.rejected]: (state, action) => {
+		}
+	}
 });
 const { reducer } = settingSlice;
 export default reducer;

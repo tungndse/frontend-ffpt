@@ -37,7 +37,7 @@ export default function TableMenuManagement() {
 			dataIndex: 'menuName',
 			key: 'menuName',
 			align: 'left',
-			sorter: true,
+			//sorter: true,
 			sorter: (a, b) => {
 				if (a.menuName > b.menuName) {
 					return 1;

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import { message } from 'antd';
 import { menuService } from '../services/menuService.js';
+import { BASE_URL } from '../services/httpService';
 
 export const createMenu = createAsyncThunk('menuSlice/createMenu', async (menuInfo, thunkAPI) => {
 	try {
@@ -12,7 +13,7 @@ export const createMenu = createAsyncThunk('menuSlice/createMenu', async (menuIn
 			body: JSON.stringify(menuInfo),
 		};
 
-		const url = `https://localhost:44323/api/v1.0/menu/CreateMenu`;
+		const url = BASE_URL + '/menu/CreateMenu';
 		const response = await fetch(url, requestOptions);
 
 		if (!response.ok) {
@@ -30,7 +31,7 @@ export const createMenu = createAsyncThunk('menuSlice/createMenu', async (menuIn
 
 export const getMenuList = createAsyncThunk('menuSlice/getMenuList', async (pagination, thunkAPI) => {
 	try {
-		const res = await fetch('https://localhost:44323/api/v1.0/menu/GetListMenu');
+		const res = await fetch('https://webapp-ffpt.azurewebsites.net/api/v1.0/menu/GetListMenu');
 		const data = await res.json();
 		// console.log('getMenuList', data);
 		return data;
@@ -42,7 +43,7 @@ export const getMenuList = createAsyncThunk('menuSlice/getMenuList', async (pagi
 
 export const getMenuInfo = createAsyncThunk('menuSlice/getMenuInfo', async (menuId, thunkAPI) => {
 	try {
-		const res = await fetch(`https://localhost:44323/api/v1.0/menu/GetMenuById?menuId=${menuId}`);
+		const res = await fetch(BASE_URL + '/menu/GetMenuById?menuId=${menuId}');
 		const data = await res.json();
 		// console.log('getMenuInfo', data);
 		return data;
@@ -61,7 +62,7 @@ export const updateMenu = createAsyncThunk('menuSlice/updateMenu', async ({ menu
 			body: JSON.stringify(newMenu),
 		};
 
-		const url = `https://localhost:44323/api/v1.0/menu/UpdateMenu?menuId=${menuID}`;
+		const url = BASE_URL + '/menu/UpdateMenu?menuId=${menuID}';
 		const response = await fetch(url, requestOptions);
 
 		if (!response.ok) {

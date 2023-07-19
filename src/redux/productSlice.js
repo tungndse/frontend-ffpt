@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import { productService } from '../services/productService';
 import { message } from 'antd';
+import { BASE_URL } from '../services/httpService';
 export const createProduct = createAsyncThunk('productSlice/createProduct', async (productInfo, thunkAPI) => {
 	try {
 		const requestOptions = {
@@ -11,7 +12,7 @@ export const createProduct = createAsyncThunk('productSlice/createProduct', asyn
 			body: JSON.stringify(productInfo),
 		};
 
-		const url = `https://localhost:44323/api/v1.0/product/CreateProduct`;
+		const url = BASE_URL + `/product/CreateProduct`;
 		const response = await fetch(url, requestOptions);
 
 		if (!response.ok) {
@@ -31,7 +32,7 @@ export const createProduct = createAsyncThunk('productSlice/createProduct', asyn
 
 export const getProductList = createAsyncThunk('locatiohSlice/getProductList', async (pagination, thunkAPI) => {
 	try {
-		const res = await fetch('https://localhost:44323/api/v1.0/product');
+		const res = await fetch('https://webapp-ffpt.azurewebsites.net/api/v1.0/product');
 		const data = await res.json();
 		console.log('getProductList', data.results);
 		return data.results;
@@ -42,7 +43,7 @@ export const getProductList = createAsyncThunk('locatiohSlice/getProductList', a
 });
 export const getProductInfo = createAsyncThunk('productSlice/getProductById', async (productID, thunkAPI) => {
 	try {
-		const res = await fetch(`https://localhost:44323/api/v1.0/product/GetById?id=${productID}`);
+		const res = await fetch(BASE_URL + `/product/GetById?id=${productID}`);
 		const data = await res.json();
 		return data;
 	} catch (error) {
@@ -52,7 +53,7 @@ export const getProductInfo = createAsyncThunk('productSlice/getProductById', as
 
 export const deleteProduct = createAsyncThunk('productSlice/deleteProduct', async (ProductID, thunkAPI) => {
 	try {
-		const response = await fetch(`https://localhost:44323/api/v1.0/product/DeleteProduct?productId=${ProductID}`, {
+		const response = await fetch(BASE_URL + `/product/DeleteProduct?productId=${ProductID}`, {
 			method: 'DELETE',
 		});
 
@@ -81,7 +82,7 @@ export const updateProduct = createAsyncThunk(
 				body: JSON.stringify(newproductInfo),
 			};
 
-			const url = `https://localhost:44323/api/v1.0/product/UpdateProduct?productId=${productID}`;
+			const url = BASE_URL + `/product/UpdateProduct?productId=${productID}`;
 			const response = await fetch(url, requestOptions);
 
 			if (!response.ok) {
@@ -119,7 +120,7 @@ export const getProductListInMenu = createAsyncThunk(
 	'productList/getProductListInMenu',
 	async (pagination, thunkAPI) => {
 		try {
-			const res = await fetch('https://localhost:44323/api/v1.0/product-in-menu');
+			const res = await fetch('https://webapp-ffpt.azurewebsites.net/api/v1.0/product-in-menu');
 			const data = await res.json();
 			// console.log('getProductListInMenu', data);
 			return data;
@@ -136,7 +137,7 @@ export const getProductListInMenuByMenuId = createAsyncThunk(
 	async (menuId, thunkAPI) => {
 		try {
 			const res = await fetch(
-				`https://localhost:44323/api/v1.0/product-in-menu/GetProductInMenuByMenu?menuId=${menuId}`
+				BASE_URL + `/product-in-menu/GetProductInMenuByMenu?menuId=${menuId}`
 			);
 			const data = await res.json();
 			// console.log('getProductListInMenuByMenuId: ', data);
@@ -154,7 +155,7 @@ export const getProductInMenuInfo = createAsyncThunk(
 		console.log('Data api:', productID);
 		try {
 			const result = await fetch(
-				`https://localhost:44323/api/v1.0/product-in-menu/GetProductInMenuById?Id=${productID}`
+				BASE_URL + `/product-in-menu/GetProductInMenuById?Id=${productID}`
 			);
 			const data = await result.json();
 			// console.log('getProductInMenuInfo: ', data);
@@ -177,7 +178,7 @@ export const createProductInMenu = createAsyncThunk(
 				body: JSON.stringify(productInfo),
 			};
 
-			const url = `https://localhost:44323/api/v1.0/product-in-menu/CreateProductInMenu`;
+			const url = BASE_URL + `/product-in-menu/CreateProductInMenu`;
 			const response = await fetch(url, requestOptions);
 
 			if (!response.ok) {
@@ -207,7 +208,7 @@ export const updateProductInMenu = createAsyncThunk(
 				body: JSON.stringify(newproductInfo),
 			};
 
-			const url = `https://localhost:44323/api/v1.0/product-in-menu/UpdateProductInMenu?productInMenuId=${productID}`;
+			const url = BASE_URL + `/product-in-menu/UpdateProductInMenu?productInMenuId=${productID}`;
 			const response = await fetch(url, requestOptions);
 
 			if (!response.ok) {
@@ -229,7 +230,7 @@ export const updateProductInMenu = createAsyncThunk(
 export const deleteProductInMenu = createAsyncThunk('productSlice/deleteProductInMenu', async (productID, thunkAPI) => {
 	try {
 		const response = await fetch(
-			`https://localhost:44323/api/v1.0/product-in-menu/DeleteProductInMenu?productInMenuId=${productID}`,
+			BASE_URL + `/product-in-menu/DeleteProductInMenu?productInMenuId=${productID}`,
 			{
 				method: 'DELETE',
 			}

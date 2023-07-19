@@ -6,7 +6,7 @@ export const columnsProductManagement = [
 		dataIndex: 'name',
 		key: 'name',
 		align: 'center',
-		sorter: true,
+		//sorter: true,
 		sorter: (a, b) => {
 			if (a.name > b.name) {
 				return 1;

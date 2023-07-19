@@ -69,7 +69,7 @@ export default function TableProductInMenu() {
 			dataIndex: 'productName',
 			key: 'productName',
 			align: 'left',
-			sorter: true,
+			//sorter: true,
 			sorter: (a, b) => {
 				if (a.productName > b.productName) {
 					return 1;
